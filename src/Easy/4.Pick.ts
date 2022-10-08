@@ -20,20 +20,31 @@ const todo: TodoPreview = {
 type MyPick<T, K> = {
   [P in keyof T as P extends K ? P : never]: T[P]
 }
+
 type MyPick2<T, K extends keyof T> = {
   [P in K]: T[P]
 }
-let a = [1, 2] as const
 
-function mypick<T>(todo: T, keys: string[]) {
-  let obj = {}
-  keys.forEach(key => {
+function mypick<T, K extends readonly any[]>(todo: T, keys: K) {
+  let obj = <Pick<T, K[number]>>{}
+  keys.forEach((key: K[number]) => {
     if (key in todo) {
       obj[key] = todo[key]
     }
   });
   return obj
+
 }
+
+const obj = {
+
+
+  title: "xxx",
+  description: "sss",
+  completed: true
+}
+let res: TodoPreview = mypick(obj, ['title', 'completed'] as const)
+
 
 export { }
 
