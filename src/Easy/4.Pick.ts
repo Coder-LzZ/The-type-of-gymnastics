@@ -37,8 +37,6 @@ function mypick<T, K extends readonly any[]>(todo: T, keys: K) {
 }
 
 const obj = {
-
-
   title: "xxx",
   description: "sss",
   completed: true
